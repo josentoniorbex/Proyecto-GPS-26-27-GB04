@@ -13,8 +13,12 @@ import pkgutil
 from pathlib import Path
 
 from flask import Flask, render_template
+from flask_wtf.csrf import CSRFProtect
 
 from app import db
+
+# Protección CSRF: todo formulario POST debe enviar el token csrf_token.
+csrf = CSRFProtect()
 
 
 def create_app(test_config=None):
@@ -32,6 +36,7 @@ def create_app(test_config=None):
     Path(app.instance_path).mkdir(parents=True, exist_ok=True)
 
     db.init_app(app)
+    csrf.init_app(app)
     _registrar_rutas(app)
     _registrar_errores(app)
     return app

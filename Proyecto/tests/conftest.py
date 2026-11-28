@@ -12,6 +12,8 @@ def app(tmp_path):
     return create_app({
         "TESTING": True,
         "DATABASE": str(tmp_path / "pruebas.sqlite"),
+        # Las pruebas envían formularios sin token; la protección CSRF se prueba en test_csrf.py
+        "WTF_CSRF_ENABLED": False,
     })
 
 
