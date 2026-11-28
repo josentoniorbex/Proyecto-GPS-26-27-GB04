@@ -85,7 +85,9 @@ def test_sin_codigo_se_genera_uno(app):
 
 
 def test_los_codigos_nuevos_no_se_repiten():
-    assert gestor_soporte.nuevoCodigoIncidencia() != gestor_soporte.nuevoCodigoIncidencia()
+    primero = gestor_soporte.nuevoCodigoIncidencia()
+    segundo = gestor_soporte.nuevoCodigoIncidencia()
+    assert primero != segundo
 
 
 def test_si_falla_el_registro_se_informa_y_se_puede_reintentar(app, monkeypatch):
